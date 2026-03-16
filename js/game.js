@@ -126,7 +126,7 @@ function generate() {
   }
   
 //Update info labels
-  document.title = "Bombox - " + nam;
+  document.title = "Boxpect - " + nam;
   target = total-bmb;
   remain = 0;
   document.getElementById("remaining").innerHTML = bmb;
