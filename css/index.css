@@ -27,7 +27,7 @@ body {
   width:50%;
 }
 
-input {
+input[type="range"] {
   display: block;
   margin-top: 8px;
   }
