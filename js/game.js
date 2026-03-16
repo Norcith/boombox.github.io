@@ -67,27 +67,23 @@ function generate() {
 
   //Hint generation
     //Find enabled hints
-  let counter = 0;
   let hints = [];
 
   for (let i = 0; i < hin.length; i++) {
-    if (hin[i] === "1") { 
-      hints.push(counter); 
-      counter++;
-    } else { hints.push(0) }
+    if (hin[i] === "1") { hints.push(i) }
   }
 
   k = 0;
   for (let i = 0; i < lin; i++) {
   for (let j = 0; j < col; j++) {
-    let random = Math.floor(Math.random() * (hin.split("1").length - 1));
+    let random = hints[Math.floor(Math.random() * hints.length)];
     let question = [];
     let negation;
     let not;
     let selected;
     
   //Proximity hint
-    if (random == hints[0]) {
+    if (random == 0) {
       if (j === 0) { 
         if (i === 0)        { question = [[2,k+1],[1,k+col]] }
         else if (i===lin-1) { question = [[2,k+1],[0,k-col]] }
@@ -112,7 +108,7 @@ function generate() {
       document.querySelector("#" + ids[k] + " p").innerHTML = "The box " + expressions[0][selected[0]] + " is " + not + " a bomb.";
     }
   //Emoji hint
-    if (random === hints[1]) {
+    if (random === 1) {
       selected = document.querySelector("#" + ids[Math.floor(Math.random()*ids.length)] + " button").innerHTML.trim().replace(/\uFE0F/g, "");
       
       negation = -1;
