@@ -80,7 +80,7 @@ function generate() {
   k = 0;
   for (let i = 0; i < lin; i++) {
   for (let j = 0; j < col; j++) {
-    let random = Math.floor(Math.random()*hin.filter(val => val === "1").length);
+    let random = Math.floor(Math.random() * hin.split("1").length - 1);
     let question = [];
     let negation;
     let not;
