@@ -192,9 +192,9 @@ function lose() {
 }
 
 function updateTimer() {
+  let seconds = document.getElementById("timerSeconds");
+  let minutes = document.getElementById("timerMinutes");
   if (isPlaying < 2) { 
-    let seconds = document.getElementById("timerSeconds");
-    let minutes = document.getElementById("timerMinutes");
     if (seconds.innerHTML === "59") {
       minutes.innerHTML = String((Number(minutes.innerHTML) + 1)).padStart(2,"0")
       seconds.innerHTML = "00"
