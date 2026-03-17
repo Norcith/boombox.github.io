@@ -118,6 +118,7 @@ function generate() {
       
       tag.innerHTML = "There" + not + " explosive " + names[emojis.indexOf(selected)] + ".";
     }
+  //Row & Column hint
     if (random === 2) {
       selected = Math.floor(Math.random() * total);
       if (states[selected] === "bomb") {negation = 1}
@@ -136,7 +137,6 @@ function generate() {
       tag.innerHTML = "There " + not + " in " + var1 + " n°" + var2
 
     }
-    }
     k++;
   }
   }
@@ -151,6 +151,7 @@ function generate() {
   
   isPlaying = 0;
   timer = setInterval(updateTimer,1000);
+}
 
 function iconClick(element) {
   isPlaying = 1
