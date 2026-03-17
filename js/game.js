@@ -127,10 +127,10 @@ function generate() {
       if (states[i] === "bomb") { negation *= -1 } 
       if (random < 0.5) {
         random = Math.floor(Math.random()*lin);
-        for (l = random - (random % col), l < col, l++) {if (states[l] === "bomb") { negation = 1 }}
+        for (l = random - (random % col); l < col; l++) {if (states[l] === "bomb") { negation = 1 }}
       } else {
         random = Math.floor(Math.random()*col);
-        for (l = random - (random % lin), l < lin, l++) {if (states[l] === "bomb") { negation = 1 }}        
+        for (l = random - (random % lin); l < lin; l++) {if (states[l] === "bomb") { negation = 1 }}        
       }
     }
     k++;
