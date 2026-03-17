@@ -4,6 +4,7 @@ let remain;
 let target;
 let isPlaying;
 let timer;
+let nam;
 
 window.addEventListener("beforeunload", (leave) => {
   if (isPlaying === 1) {
@@ -18,7 +19,7 @@ function generate() {
   const lin = params.get("rows");
   const bmb = params.get("bombs");
   const emo = params.get("emojis");
-  const nam = params.get("name");
+  nam = params.get("name");
   const hin = params.get("hints");
   
   const total = lin*col;
