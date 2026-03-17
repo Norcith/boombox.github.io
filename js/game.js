@@ -75,60 +75,67 @@ function generate() {
   for (let i = 0; i < lin; i++) {
   for (let j = 0; j < col; j++) {
     let random = hints[Math.floor(Math.random() * hints.length)];
-    let question = [];
-    let negation;
+    let tag = document.querySelector("#" + ids[k] + " p")
+    let negation = -1;
+    let var1 = [];
+    let var2;
     let not;
     let selected;
     
   //Proximity hint
     if (random == 0) {
       if (j === 0) { 
-        if (i === 0)        { question = [[2,k+1],[1,k+col]] }
-        else if (i===lin-1) { question = [[2,k+1],[0,k-col]] }
-        else                { question = [[2,k+1],[0,k-col],[1,k+col]] }
+        if (i === 0)        { var1 = [[2,k+1],[1,k+col]] }
+        else if (i===lin-1) { var1 = [[2,k+1],[0,k-col]] }
+        else                { var1 = [[2,k+1],[0,k-col],[1,k+col]] }
       }
       else if (j === col-1) {
-        if (i === 0)        { question = [[3,k-1],[1,k+col]] }
-        else if (i===lin-1) { question = [[3,k-1],[0,k-col]] }
-        else                { question = [[3,k-1],[0,k-col],[1,k+col]] }
+        if (i === 0)        { var1 = [[3,k-1],[1,k+col]] }
+        else if (i===lin-1) { var1 = [[3,k-1],[0,k-col]] }
+        else                { var1 = [[3,k-1],[0,k-col],[1,k+col]] }
       }
-      else if (i === 0)     { question = [[3,k-1],[2,k+1],[1,k+col]] }
-      else if (i===lin-1)   { question = [[3,k-1],[2,k+1],[0,k-col]] }
-      else                  { question = [[0,k-col],[1,k+col],[2,k+1],[3,k-1]] }
+      else if (i === 0)     { var1 = [[3,k-1],[2,k+1],[1,k+col]] }
+      else if (i===lin-1)   { var1 = [[3,k-1],[2,k+1],[0,k-col]] }
+      else                  { var1 = [[0,k-col],[1,k+col],[2,k+1],[3,k-1]] }
 
-      selected = question[Math.floor(Math.random()*question.length)];
+      selected = var1[Math.floor(Math.random()*var1.length)];
 
       if (states[selected[1]] === "bomb") {negation = 1} else {negation = -1}
       if (states[k] === "bomb")           {negation *= -1}
       if (negation === -1)                {not = "not"}  else {not = ""}
       
-      document.querySelector("#" + ids[k] + " p").innerHTML = "The box " + expressions[0][selected[0]] + " is " + not + " a bomb.";
+      tag.innerHTML = "The box " + expressions[0][selected[0]] + " is " + not + " a bomb.";
     }
   //Emoji hint
     if (random === 1) {
       selected = document.querySelector("#" + ids[Math.floor(Math.random()*ids.length)] + " button").innerHTML.trim().replace(/\uFE0F/g, "");
-      
-      negation = -1;
-      for (let l = 0; l < states.length; l++) {if (states[l] == "bomb" && document.querySelector("#" + ids[l] + " button").innerHTML.trim().replace(/\uFE0F/g, "") == selected) {
+            for (let l = 0; l < states.length; l++) {if (states[l] == "bomb" && document.querySelector("#" + ids[l] + " button").innerHTML.trim().replace(/\uFE0F/g, "") == selected) {
         negation = 1;
         break;
         }}
       if (states[k] === "bomb") {negation *= -1}
       if (negation === 1) {not = "'s at least 1 "} else {not = " isn't any "}
       
-      document.querySelector("#" + ids[k] + " p").innerHTML = "There" + not + " explosive " + names[emojis.indexOf(selected)] + ".";
+      tag.innerHTML = "There" + not + " explosive " + names[emojis.indexOf(selected)] + ".";
     }
     if (random === 2) {
-      negation = -1;
-      random = Math.random();
-      if (states[i] === "bomb") { negation *= -1 } 
+      selected = Math.floor(Math.random() * total);
+      if (states[selected] === "bomb") {negation = 1}
+      if (states[k] === "bomb") {negation *= -1}
+      
+      random = Math.random()
       if (random < 0.5) {
-        random = Math.floor(Math.random()*lin);
-        for (l = random - (random % col); l < col; l++) {if (states[l] === "bomb") { negation = 1 }}
+        var1 = "column";
+        var2 = Math.floor(selected / col);
       } else {
-        random = Math.floor(Math.random()*col);
-        for (l = random - (random % lin); l < lin; l++) {if (states[l] === "bomb") { negation = 1 }}        
+        var1 = "row";
+        var2 = Math.floor(selected / row);
       }
+
+      if (negation === -1) {not = "are no bombs"} else {not = "is at least 1 bomb"}
+      tag.innerHTML = "There " + not + " in " + var1 + " n°" + var2
+
+    }
     }
     k++;
   }
@@ -144,7 +151,6 @@ function generate() {
   
   isPlaying = 0;
   timer = setInterval(updateTimer,1000);
-}
 
 function iconClick(element) {
   isPlaying = 1
