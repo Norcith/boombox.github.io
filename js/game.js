@@ -227,14 +227,14 @@ function setOverlay(title,text) {
     let getMins = localStorage.getItem(minsKey);
     let getSecs = localStorage.getItem(secsKey);
 
-    if (currentMins >= getMins && currentSecs > getSecs && ["Easy","Normal","Hard"].includes(nam)) {
-      if (replace) {  
-        localStorage.setItem(minsKey,currentMins);
-        localStorage.setItem(secsKey,currentSecs);
+    if ((currentMins <= getMins && currentSecs < getSecs) || (getMins === null) && ["Easy","Normal","Hard"].includes(nam) && replace) {
+      localStorage.setItem(minsKey,currentMins);
+      localStorage.setItem(secsKey,currentSecs);
+      if (currentMins !== null) {
         getMins = currentMins;
-        getSecs = currentSecs
+        getSecs = currentSecs;
     }
-      document.getElementById("bestMinutes").innerHTML = getMins;
-      document.getElementById("bestSeconds").innerHTML = getSecs;
   }
+    document.getElementById("bestMinutes").innerHTML = getMins;
+    document.getElementById("bestSeconds").innerHTML = getSecs;
 }
