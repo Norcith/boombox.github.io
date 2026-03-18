@@ -231,8 +231,6 @@ function setOverlay(title,text) {
       if (replace) {
         localStorage.setItem(minsKey,currentMins);
         localStorage.setItem(secsKey,currentSecs);
-      }
-      if (currentMins !== null) {
         getMins = currentMins;
         getSecs = currentSecs;
     }
