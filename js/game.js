@@ -127,13 +127,13 @@ function generate() {
         var2 = "column";
       } else {
         var1 = lin
-        var2 = "line";
+        var2 = "row";
       }
       selected = Math.floor(Math.random() * var1);
       
       for (let l = 0; l < var1; l++) {
-        if (var1 === lin && states[(selected-1) * var1 + l] === "bomb") {negation = 1}
-        if (var1 === col && states[(selected-1) + var1 * l] === "bomb") {negation = 1}
+        if (var1 === lin && states[selected * var1 + l] === "bomb") {negation = 1}
+        if (var1 === col && states[selected + var1 * l] === "bomb") {negation = 1}
       }
 
       if (states[k] === "bomb") {negation *= -1}
