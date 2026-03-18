@@ -121,21 +121,21 @@ function generate() {
     }
   //Row & Column hint
     if (random === 2) {
-      selected = Math.floor(Math.random() * total);
-      if (states[selected] === "bomb") {negation = 1}
-      if (states[k] === "bomb") {negation *= -1}
-      
       random = Math.random()
       if (random < 0.5) {
-        var1 = "column";
-        var2 = selected % col;
+        var1 = col;
+        var2 = "column";
       } else {
-        var1 = "row";
-        var2 = Math.floor(selected / col);
+        var1 = lin
+        var2 = "line";
       }
+      selected = Math.floor(Math.random() * var1);
+      
+      for (let l = 0; l < var1; l++) {if (states[(selected-1)*var1+l] === "bomb") {negation = 1}}
 
+      if (states[k] === "bomb") {negation *= -1}
       if (negation === -1) {not = "are no bombs"} else {not = "is at least 1 bomb"}
-      tag.innerHTML = "There " + not + " in " + var1 + " n°" + (var2 + 1)
+      tag.innerHTML = "There " + not + " in " + var2 + " n°" + selected
 
     }
     k++;
