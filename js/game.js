@@ -137,7 +137,7 @@ function generate() {
       }
 
       if (states[k] === "bomb") {negation *= -1}
-      if (negation === 1) {not = "are no bombs"} else {not = "is at least 1 bomb"}
+      if (negation === -1) {not = "are no bombs"} else {not = "is at least 1 bomb"}
       tag.innerHTML = "There " + not + " in " + var2 + " n°" + (selected+1)
 
     }
